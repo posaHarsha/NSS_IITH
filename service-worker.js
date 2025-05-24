@@ -1,14 +1,15 @@
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('scanner-cache').then(cache => {
+    caches.open('nss-scanner-cache').then(cache => {
       return cache.addAll([
         '/',
         '/index.html',
-        '/html5-qrcode.min.js',
         '/manifest.json',
+        '/html5-qrcode.min.js',
+        '/beep.ogg',
         '/icon-192.png',
         '/icon-512.png',
-        '/beep.mp3'
+        '/service-worker.js'
       ]);
     })
   );
@@ -16,6 +17,6 @@ self.addEventListener('install', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(res => res || fetch(e.request))
+    caches.match(e.request).then(response => response || fetch(e.request))
   );
 });

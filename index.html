@@ -15,6 +15,7 @@
 </head>
 <body>
   <h1>NSS Attendance Scanner</h1>
+  <h3 id="last-scan">Last Scanned: None</h3>
   <div id="reader"></div>
   <button onclick="startScanner()">Start Scan</button>
   <button onclick="stopScanner()">Stop Scan</button>
@@ -54,6 +55,7 @@
         scans.push({ code: decodedText, time });
         saveScans(); // Autosave
         document.getElementById('beep').play();
+        document.getElementById('last-scan').textContent = `Last Scanned: ${decodedText}`;
         const li = document.createElement('li');
         li.textContent = `${decodedText} - ${time}`;
         document.getElementById('scan-list').appendChild(li);
